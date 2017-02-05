@@ -14,14 +14,20 @@
 # [ ] - TEMPLATE
 #################################################################
 
+# Getting confirmation from user
 echo "By running this script, your directories will be deleted after making the archive."
+echo "Running this command in HOME directory or at system root can make damage."
 read -p "Are you sure you want to execute this operation? (yes/no)" confirm
 
-if [ $confirm != "yes" ]; then
-	echo "=========================================="
-	echo "The operation is terminated."
-	echo "If this is not the expected result, you might have entered wrong confirmation letters. Make sure you enter 'yes' and not simply 'y'."
-	exit
+if [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
+	echo "To confirm, type 'yes' and not simply 'y'."
+	read -p "Are you sure you want to execute this operation? (yes/no)" confirm
+
+	if  [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
+		echo "__________________________________________"
+		echo "The operation is was not confirmed by the user!"
+		exit
+	fi
 fi
 
 counter=0  # for counting the number of items under operation
@@ -39,7 +45,7 @@ echo "=========================================="
 
 if [ $counter == 0 ]; then
 	echo "No directory found here!"
-	echo "Exit without making any change"
+	echo "Exit without making any change."
 else
 	echo "The operation has finished!"
 	echo "$counter item(s) were archived."
