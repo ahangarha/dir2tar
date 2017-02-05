@@ -24,8 +24,8 @@ if [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
 	read -p "Are you sure you want to execute this operation? (yes/no)" confirm
 
 	if  [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
-		echo "__________________________________________"
-		echo "The operation is was not confirmed by the user!"
+		echo "____________________________________________"
+		echo "The operation was not confirmed by the user!"
 		exit
 	fi
 fi
@@ -35,7 +35,13 @@ counter=0  # for counting the number of items under operation
 for item in *;do
 	if [ -d "$item" ]; then
 		((counter++))
+
+		# Archive as tar and then delete
 		tar cvf "$item".tar "$item"  && rm -r "$item"
+
+		# Result prompt
+		echo "____________________________________________"
+		echo "$item >>>> DONE"
 	fi
 done
 
