@@ -5,7 +5,7 @@
 
 ### Todo List ###################################################
 #
-# [ ] Make the `tar` command uses new variables
+# [ ] make interactive mode functional
 #
 #################################################################
 
