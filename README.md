@@ -12,6 +12,7 @@ By now, the script looks for all directories within the PWD (Present Working Dir
  - [x] - improve the confirmation 
    - [x] - It should ask again if the user has entered 'y'
    - [x] - convert $confirm to lowercase for comparision
+ - [ ] Make a black list of folders in which this script should refuse to perform (such as root, home,...)
  - [ ] Add `-h --help` option
  - [ ] Add `-v --verbose` and `-z --compress` options
  - [ ] Add `-i --interactive` option
