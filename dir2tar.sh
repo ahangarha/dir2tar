@@ -5,8 +5,9 @@
 
 #################################################################
 ### TO DO
-# [*] - use git
-# [*] - Warn and get confirmation from the user
+# [ ] - improve the confirmation 
+#       [ ] - It should ask again if the user has entered 'y'
+#       [ ] - convert $confirm to lowercase for comparision
 # [ ] - Add more comment (documentation)
 # [ ] - add options for compression and verbose
 # [ ] - add --help and --version
@@ -14,9 +15,28 @@
 # [ ] - TEMPLATE
 #################################################################
 
+# Exit the script if there is no directory here
+number_of_dir=$(ls -l | grep "^d" | wc -l)
+
+if [ $number_of_dir == "0" ]; then
+	echo "No directory is found here!"
+	exit
+fi
+
+
 # Getting confirmation from user
-echo "By running this script, your directories will be deleted after making the archive."
+echo "By running this script, the following directories will be deleted after making the archive."
 echo "Running this command in HOME directory or at system root can make damage."
+echo " "
+echo "The operation will be performed on the following directories:"
+
+#show the list of directories
+for item in *;do
+	if [ -d "$item" ]; then
+		echo " - $item"
+	fi
+done
+
 read -p "Are you sure you want to execute this operation? (yes/no)" confirm
 
 if [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
