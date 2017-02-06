@@ -38,15 +38,22 @@ for item in *;do
 done
 
 read -p "Are you sure you want to execute this operation? (yes/no)" confirm
+# make sure that $confirm is all lowercase
+confirm=$(echo "$confirm" | sed 's/.*/\L&/')
 
-if [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
-	echo "To confirm, type 'yes' and not simply 'y'."
-	read -p "Are you sure you want to execute this operation? (yes/no)" confirm
-
-	if  [ $confirm != "yes" ] && [ $confirm != "YES" ]; then
-		echo "____________________________________________"
-		echo "The operation was not confirmed by the user!"
+if [ $confirm != "yes" ]; then
+	# Give another opportunity if the user has entered 'y'. Otherwise, assume 'no'
+	if [ $confirm != "y" ];then
 		exit
+	else
+		echo "To confirm, type 'yes' and not simply 'y'."
+		read -p "Are you sure you want to execute this operation? (yes/no)" confirm
+		# make sure that $confirm is all lowercase
+		confirm=$(echo "$confirm" | sed 's/.*/\L&/')
+
+		if  [ $confirm != "yes" ]; then
+			exit
+		fi
 	fi
 fi
 
